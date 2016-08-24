@@ -55,7 +55,13 @@ module Houston
 
       json['aps'] ||= {}
       json['aps']['alert'] = @alert if @alert
-      json['aps']['badge'] = @badge.to_i rescue 0 if @badge
+      
+      if @badge == "increment"
+        json['aps']['badge'] = @badge
+      else
+        json['aps']['badge'] = @badge.to_i rescue 0 if @badge
+      end
+
       json['aps']['sound'] = @sound if @sound
       json['aps']['category'] = @category if @category
       json['aps']['content-available'] = 1 if @content_available
